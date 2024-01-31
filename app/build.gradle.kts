@@ -6,7 +6,11 @@ android {
     namespace = "algonquin.cst2335.prabhpreetsandroidlabs"
     compileSdk = 34
 
-    defaultConfig {
+    buildFeatures {
+        viewBinding = true
+    }
+
+        defaultConfig {
         applicationId = "algonquin.cst2335.prabhpreetsandroidlabs"
         minSdk = 27
         targetSdk = 34
