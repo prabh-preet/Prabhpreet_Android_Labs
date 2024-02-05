@@ -5,4 +5,5 @@
     <string name="button_message">je suis un bouton</string>
     <string name="edit_message">Entrez votre nom ici</string>
     <string name="hint_text">écris quelque chose ici</string>
+    <string name="box_message">Bois-tu du café ?</string>
 </resources>
