@@ -3,31 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#D3EFE9">
 
     <TextView
-        android:id="@+id/receiveMessage"
-        android:layout_width="159dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="673dp"
+        android:id="@+id/message"
+        android:layout_width="121dp"
+        android:layout_height="65dp"
+        android:background="@android:drawable/editbox_background"
         android:text="Message goes here"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/receiveTime"
+        app:layout_constraintStart_toEndOf="@+id/time"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/receiveTime"
-        android:layout_width="194dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="707dp"
+        android:id="@+id/time"
+        android:layout_width="220dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="16dp"
         android:text="Time goes here"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/receiveMessage"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,11 +31,8 @@
         android:id="@+id/imageView2"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="681dp"
+        android:layout_marginTop="4dp"
         android:src="@drawable/receive_image"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/receiveMessage"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

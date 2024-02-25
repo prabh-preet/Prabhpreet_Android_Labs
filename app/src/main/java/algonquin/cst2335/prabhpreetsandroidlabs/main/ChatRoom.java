@@ -26,9 +26,9 @@ public class ChatRoom extends AppCompatActivity {
 
     ActivityChatRoomBinding binding;
     ChatRoomViewModel chatModel;
-    private RecyclerView.Adapter myAdapter;
+
     ArrayList<ChatMessage> messages = new ArrayList<>();
-    //RecyclerView.Adapter<MyRowHolder> myAdapter;
+    RecyclerView.Adapter<MyRowHolder> myAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,23 +50,26 @@ public class ChatRoom extends AppCompatActivity {
             String currentDateandTime = sdf.format(new Date());
 
             messages.add(new ChatMessage (binding.textInput.getText().toString(), currentDateandTime, true));
-
             myAdapter.notifyItemInserted(messages.size()-1);
+
             binding.textInput.setText("");
         });
 
         binding.receiveButton.setOnClickListener(click -> {
+
             SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a");
             String currentDateandTime = sdf.format(new Date());
 
             messages.add(new ChatMessage (binding.textInput.getText().toString(), currentDateandTime, false));
+            //  myAdapter.notifyItemInserted(messages.size()-1);
+            myAdapter.notifyDataSetChanged();
 
-            myAdapter.notifyItemInserted(messages.size()-1);
+
             binding.textInput.setText("");
         });
 
-        binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
-        binding.recycleView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+
+        binding.recycleView.setAdapter(myAdapter =new RecyclerView.Adapter<MyRowHolder>() {
             @NonNull
             @Override
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -82,7 +85,6 @@ public class ChatRoom extends AppCompatActivity {
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
-                //holder.messageText.setText("");
                 ChatMessage obj = messages.get(position);
                 holder.messageText.setText(obj.getMessage());
                 holder.timeText.setText(obj.getTime());
@@ -90,12 +92,11 @@ public class ChatRoom extends AppCompatActivity {
 
             @Override
             public int getItemCount() {
-
                 return messages.size();
             }
             public int getItemViewType(int position) {
                 ChatMessage object = messages.get(position);
-                if(object.getButton() == true){
+                if(object.getButton() ){
                     return 0;
                 }
                 else{
@@ -103,15 +104,15 @@ public class ChatRoom extends AppCompatActivity {
                 }
             }
         });
+        binding.recycleView.setLayoutManager(new LinearLayoutManager(this));
     }
     class MyRowHolder extends RecyclerView.ViewHolder {
         TextView messageText;
         TextView timeText;
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
-
-            messageText = itemView.findViewById(R.id.sentMessage);
-            timeText = itemView.findViewById(R.id.sentTime);
+            messageText = itemView.findViewById(R.id.message);
+            timeText = itemView.findViewById(R.id.time);
         }
     }
 }
