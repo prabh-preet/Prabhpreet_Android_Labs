@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
 }
 
-android.applicationVariants.all { variant ->
+/* android.applicationVariants.all { variant ->
     task("generate${variant.name.capitalize()}Javadoc", type = Javadoc) {
         description = "Generates Javadoc for $variant.name."
         source = variant.javaCompile.source
@@ -17,7 +17,7 @@ android.applicationVariants.all { variant ->
         }
     }
 }
-
+*/
 android {
     namespace = "algonquin.cst2335.prabhpreetsandroidlabs"
     compileSdk = 34
@@ -43,10 +43,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
-
-
-
-
 
 dependencies {
 

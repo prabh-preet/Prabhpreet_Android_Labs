@@ -38,7 +38,7 @@
         android:layout_marginTop="32dp"
         android:backgroundTint="#0E0E0E"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:textColor="#E64A19"
         android:textColorHighlight="@android:color/holo_orange_dark"
         android:textColorHint="#00838F"
