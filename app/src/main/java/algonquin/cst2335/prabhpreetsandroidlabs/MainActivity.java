@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         boolean foundUpperCase, foundLowerCase, foundNumber, foundSpecial;
         foundUpperCase = foundLowerCase = foundNumber = foundSpecial = false;
 
+        /* Use the loop to find if the character is lower case, upper case letter, number and
+         * special character then, return true.
+         */
         for(int i = 0; i < pw.length(); i++){
             char c = pw.charAt(i);
             if(Character.isUpperCase(c)){
