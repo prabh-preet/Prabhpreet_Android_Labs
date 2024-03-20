@@ -47,31 +47,134 @@ public class MainActivityTest {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editText),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
+        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
         appCompatEditText.perform(replaceText("12345"), closeSoftKeyboard());
 
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.button), withText("Login"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
+        ViewInteraction materialButton = onView(withId(R.id.button) );
         materialButton.perform(click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.textView), withText("You shall not pass!"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
+        ViewInteraction textView = onView(withId(R.id.textView));
         textView.check(matches(withText("You shall not pass!")));
+    }
+
+    @Test
+    public void testFindMissingUpperCase() {
+        try {
+            Thread.sleep(5086);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // find the view
+        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        // type in password123#$*
+        appCompatEditText.perform(replaceText("password123#$*"));
+
+        // find the button
+        ViewInteraction materialButton = onView(withId(R.id.button) );
+        // click the button
+        materialButton.perform(click());
+
+        // find the text view
+        ViewInteraction textView = onView(withId(R.id.textView));
+        // check the text
+        textView.check(matches(withText("You shall not pass!")));
+    }
+
+    @Test
+    public void testFindMissingLowerCase() {
+        try {
+            Thread.sleep(5086);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // find the view
+        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        // type in PASS123#$*
+        appCompatEditText.perform(replaceText("PASS123#$*"));
+
+        // find the button
+        ViewInteraction materialButton = onView(withId(R.id.button) );
+        // click the button
+        materialButton.perform(click());
+
+        // find the text view
+        ViewInteraction textView = onView(withId(R.id.textView));
+        // check the text
+        textView.check(matches(withText("You shall not pass!")));
+    }
+
+    @Test
+        public void testFindMissingDigit() {
+        try {
+            Thread.sleep(5086);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // find the view
+        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        // type in Password#$*
+        appCompatEditText.perform(replaceText("Password#$*"));
+
+        // find the button
+        ViewInteraction materialButton = onView(withId(R.id.button) );
+        // click the button
+        materialButton.perform(click());
+
+        // find the text view
+        ViewInteraction textView = onView(withId(R.id.textView));
+        // check the text
+        textView.check(matches(withText("You shall not pass!")));
+    }
+
+    @Test
+    public void testFindMissingSpecialCharacter() {
+        try {
+            Thread.sleep(5086);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // find the view
+        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        // type in Password123
+        appCompatEditText.perform(replaceText("Password123"));
+
+        // find the button
+        ViewInteraction materialButton = onView(withId(R.id.button) );
+        // click the button
+        materialButton.perform(click());
+
+        // find the text view
+        ViewInteraction textView = onView(withId(R.id.textView));
+        // check the text
+        textView.check(matches(withText("You shall not pass!")));
+    }
+
+    @Test
+    public void testMatchRequirements() {
+        try {
+            Thread.sleep(5086);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // find the view
+        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        // type in Password123#$*
+        appCompatEditText.perform(replaceText("Password123#$*"));
+
+        // find the button
+        ViewInteraction materialButton = onView(withId(R.id.button) );
+        // click the button
+        materialButton.perform(click());
+
+        // find the text view
+        ViewInteraction textView = onView(withId(R.id.textView));
+        // check the text
+        textView.check(matches(withText("Your password meets the requirements")));
     }
 
     private static Matcher<View> childAtPosition(
