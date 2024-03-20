@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         boolean foundUpperCase, foundLowerCase, foundNumber, foundSpecial;
         foundUpperCase = foundLowerCase = foundNumber = foundSpecial = false;
 
+        /* Use the loop to find if the character is lower case, upper case letter, number and
+         * special character then, return true.
+         */
         for(int i = 0; i < pw.length(); i++){
             char c = pw.charAt(i);
             if(Character.isUpperCase(c)){
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // Checking if the password is not matching the requirements and displays a toast.
         if(!foundUpperCase)
         {
             Toast.makeText(this, "Missing an upper case letter", Toast.LENGTH_SHORT).show();
