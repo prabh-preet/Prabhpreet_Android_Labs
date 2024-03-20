@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     /** This holds the label at the centre of the screen */
     private TextView box1 = null;
 
-    /** This holds the password below the label*/
+    /** This holds the password below the label */
     private EditText box2 = null;
 
     /** This holds the button at the bottom of the screen */
