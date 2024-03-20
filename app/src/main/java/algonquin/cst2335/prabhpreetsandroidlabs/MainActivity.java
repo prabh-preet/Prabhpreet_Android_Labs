@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        // Checking if the password is not matching the requirements and displays a toast.
         if(!foundUpperCase)
         {
             Toast.makeText(this, "Missing an upper case letter", Toast.LENGTH_SHORT).show();

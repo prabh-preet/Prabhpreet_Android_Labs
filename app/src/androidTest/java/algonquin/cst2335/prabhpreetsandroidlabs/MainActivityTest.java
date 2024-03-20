@@ -36,11 +36,6 @@ public class MainActivityTest {
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
-    /**
-     * This is a test class which tests a password with some numbers in the password
-     * and checks if it meets the requirements. After checking, it shows you shall not pass
-     * because you are missing an upper case letter.
-     */
     @Test
     public void mainActivityTest() {
         // Added a sleep statement to match the app's execution delay.
@@ -62,11 +57,6 @@ public class MainActivityTest {
         textView.check(matches(withText("You shall not pass!")));
     }
 
-    /**
-     * This is a test class which tests a password with numbers, special characters and lower case
-     * letters in the password and checks if it meets the requirements.
-     * After checking, it shows you shall not pass because you are missing an upper case letter.
-     */
     @Test
     public void testFindMissingUpperCase() {
         try {
@@ -91,11 +81,6 @@ public class MainActivityTest {
         textView.check(matches(withText("You shall not pass!")));
     }
 
-    /**
-     * This is a test class which tests a password with numbers, special characters and upper case
-     * letters in the password and checks if it meets the requirements.
-     * After checking, it shows you shall not pass because you are missing a lower case letter.
-     */
     @Test
     public void testFindMissingLowerCase() {
         try {
@@ -120,11 +105,6 @@ public class MainActivityTest {
         textView.check(matches(withText("You shall not pass!")));
     }
 
-    /**
-     * This is a test class which tests a password with special characters, lower case and upper case
-     * letters in the password and checks if it meets the requirements.
-     * After checking, it shows you shall not pass because you are missing a number.
-     */
     @Test
         public void testFindMissingDigit() {
         try {
@@ -149,11 +129,6 @@ public class MainActivityTest {
         textView.check(matches(withText("You shall not pass!")));
     }
 
-    /**
-     * This is a test class which tests a password with numbers, lower case and upper case
-     * letters in the password and checks if it meets the requirements.
-     * After checking, it shows you shall not pass because you are missing a special character.
-     */
     @Test
     public void testFindMissingSpecialCharacter() {
         try {
@@ -178,11 +153,6 @@ public class MainActivityTest {
         textView.check(matches(withText("You shall not pass!")));
     }
 
-    /**
-     * This is a test class which tests a password with numbers, special characters, lower case
-     * and upper case letters in the password and checks if it meets the requirements.
-     * After checking, it shows your password meets the requirements because your password is complex.
-     */
     @Test
     public void testMatchRequirements() {
         try {
