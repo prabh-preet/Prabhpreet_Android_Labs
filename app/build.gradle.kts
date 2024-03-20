@@ -2,6 +2,22 @@ plugins {
     id("com.android.application")
 }
 
+/* android.applicationVariants.all { variant ->
+    task("generate${variant.name.capitalize()}Javadoc", type = Javadoc) {
+        description = "Generates Javadoc for $variant.name."
+        source = variant.javaCompile.source
+        destinationDir = file("$rootDir/javadoc/")
+        failOnError = false
+        doFirst {
+            ext.androidJar =
+                    "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+            classpath = files(variant.javaCompile.classpath.files) +
+                    files(ext.androidJar)
+            options.addStringOption "-show-members", "package"
+        }
+    }
+}
+*/
 android {
     namespace = "algonquin.cst2335.prabhpreetsandroidlabs"
     compileSdk = 34
