@@ -6,9 +6,7 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
@@ -47,10 +45,10 @@ public class MainActivityTest {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
         appCompatEditText.perform(replaceText("12345"), closeSoftKeyboard());
 
-        ViewInteraction materialButton = onView(withId(R.id.button) );
+        ViewInteraction materialButton = onView(withId(R.id.forecastButton) );
         materialButton.perform(click());
 
         ViewInteraction textView = onView(withId(R.id.textView));
@@ -66,12 +64,12 @@ public class MainActivityTest {
         }
 
         // find the view
-        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
         // type in password123#$*
         appCompatEditText.perform(replaceText("password123#$*"));
 
         // find the button
-        ViewInteraction materialButton = onView(withId(R.id.button) );
+        ViewInteraction materialButton = onView(withId(R.id.forecastButton) );
         // click the button
         materialButton.perform(click());
 
@@ -90,12 +88,12 @@ public class MainActivityTest {
         }
 
         // find the view
-        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
         // type in PASS123#$*
         appCompatEditText.perform(replaceText("PASS123#$*"));
 
         // find the button
-        ViewInteraction materialButton = onView(withId(R.id.button) );
+        ViewInteraction materialButton = onView(withId(R.id.forecastButton) );
         // click the button
         materialButton.perform(click());
 
@@ -114,12 +112,12 @@ public class MainActivityTest {
         }
 
         // find the view
-        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
         // type in Password#$*
         appCompatEditText.perform(replaceText("Password#$*"));
 
         // find the button
-        ViewInteraction materialButton = onView(withId(R.id.button) );
+        ViewInteraction materialButton = onView(withId(R.id.forecastButton) );
         // click the button
         materialButton.perform(click());
 
@@ -138,12 +136,12 @@ public class MainActivityTest {
         }
 
         // find the view
-        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
         // type in Password123
         appCompatEditText.perform(replaceText("Password123"));
 
         // find the button
-        ViewInteraction materialButton = onView(withId(R.id.button) );
+        ViewInteraction materialButton = onView(withId(R.id.forecastButton) );
         // click the button
         materialButton.perform(click());
 
@@ -162,12 +160,12 @@ public class MainActivityTest {
         }
 
         // find the view
-        ViewInteraction appCompatEditText = onView(withId(R.id.editText) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
         // type in Password123#$*
         appCompatEditText.perform(replaceText("Password123#$*"));
 
         // find the button
-        ViewInteraction materialButton = onView(withId(R.id.button) );
+        ViewInteraction materialButton = onView(withId(R.id.forecastButton) );
         // click the button
         materialButton.perform(click());
 
