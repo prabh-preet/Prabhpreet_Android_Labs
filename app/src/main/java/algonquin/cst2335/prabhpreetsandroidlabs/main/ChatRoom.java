@@ -3,6 +3,8 @@ package algonquin.cst2335.prabhpreetsandroidlabs.main;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,6 +56,21 @@ public class ChatRoom extends AppCompatActivity {
 
         chatModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
 
+        chatModel.selectedMessage.observe(this, (newMessageValue) -> {
+            MessageDetailsFragment chatFragment = new MessageDetailsFragment( newMessageValue );
+            FragmentManager fMgr = getSupportFragmentManager();
+            FragmentTransaction tx = fMgr.beginTransaction();
+            tx.add(R.id.fragmentLocation, chatFragment);
+            tx.addToBackStack("");
+            tx.commit();
+
+            /*MessageDetailsFragment chatFragment = new MessageDetailsFragment(newMessageValue);
+            chatFragment.displayMessage(newMessageValue);
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentLocation, chatFragment)
+                    .commit();*/
+        });
         /*
          * We made the object to store the messages in a database
          */
@@ -64,20 +81,17 @@ public class ChatRoom extends AppCompatActivity {
         messages = chatModel.messages.getValue();
         if(messages == null)
         {
-            if(messages == null)
-            {
-                chatModel.messages.setValue(messages = new ArrayList<>());
+            chatModel.messages.setValue(messages = new ArrayList<>());
 
-                /*
-                 * Used executor to get all the messages which will be stored in the database
-                 */
-                Executor thread = Executors.newSingleThreadExecutor();
-                thread.execute(() ->
-                {
-                    messages.addAll( mDAO.getAllMessages() ); //Once you get the data from database
-                    runOnUiThread( () -> binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
-                });
-            }
+            /*
+             * Used executor to get all the messages which will be stored in the database
+             */
+            Executor thread = Executors.newSingleThreadExecutor();
+            thread.execute(() ->
+            {
+                messages.addAll( mDAO.getAllMessages() ); //Once you get the data from database
+                runOnUiThread( () -> binding.recycleView.setAdapter( myAdapter )); //You can then load the RecyclerView
+            });
         }
 
         binding.sendButton.setOnClickListener(click -> {
@@ -168,55 +182,34 @@ public class ChatRoom extends AppCompatActivity {
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
 
-            // Made the object for the alert dialog box named builder
-            AlertDialog.Builder builder = new AlertDialog.Builder( ChatRoom.this );
-
             /*
              * Added the listener for the working of the view when we click on the messages
              */
             itemView.setOnClickListener( clk -> {
-
                 // Find the absolute position and store it in the object we created now
-                        int position = getAbsoluteAdapterPosition();
+                int position = getAbsoluteAdapterPosition();
+                ChatMessage selected = messages.get(position);
+                chatModel.selectedMessage.postValue(selected);
 
-                        // Use of builder object without using the builder pattern
+            });
 
-                        /* builder.setMessage("Do you want to delete the message: " + messageText.getText());
-                        builder.setTitle("Question: ");
-                        builder.setNegativeButton("No", ((dialog, cl) -> {
-                        }));
-                        builder.setPositiveButton("Yes", ((dialog, cl) -> {
-                            Executor thread = Executors.newSingleThreadExecutor();
-                            thread.execute(() ->
-                            {
-                                mDAO.deleteMessage(m);
-                            });
-                            messages.remove(position);
-                            myAdapter.notifyItemRemoved(position);
-                        }));
-                        builder.create().show();
-            });*/
+                /* // Made the object for the alert dialog box named builder
+                    AlertDialog.Builder builder = new AlertDialog.Builder( ChatRoom.this );
 
-                /* Uses the builder pattern to set the title, messsage and added the
-                 * buttons which will work when we click on them
-                 */
+                // Uses the builder pattern to set the title, messsage and added the
+                 // buttons which will work when we click on them
+                 //
                 builder.setMessage("Do you want to delete the message: " + messageText.getText())
                     .setTitle("Question: ")
                     .setNegativeButton("No", ((dialog, cl) -> { }))
                     .setPositiveButton("Yes", ((dialog, cl) -> {
 
-                        /* Made the object for the ChatMessage class to store the position
-                         * of the message and will be working on that position so the
-                         * correct message will be deleted
-                         */
+
                         ChatMessage m = messages.get(position);
 
                         ChatMessage removedMessage = messages.get(position);
 
-                        /*
-                         * Delete the message by getting the exact location of the message
-                         * using the executor
-                         */
+
                         Executor thread = Executors.newSingleThreadExecutor();
                         thread.execute(() ->
                         {
@@ -227,11 +220,7 @@ public class ChatRoom extends AppCompatActivity {
                         messages.remove(position);
                         myAdapter.notifyItemRemoved(position);
 
-                        /* Used the Snackbar like the Toast it shows at the bottom of the screen
-                         * and tell us what we mention is the Snackbar.
-                         * It work to re-insert the message again after deleting it by
-                         * using the setAction method and we will use the same pattern we used for the builder
-                         */
+
                         Snackbar.make(messageText, "You deleted message #" + position, Snackbar.LENGTH_LONG)
                                 .setAction("Undo", clc -> {
                                     messages.add(position, removedMessage);
@@ -239,8 +228,7 @@ public class ChatRoom extends AppCompatActivity {
                                 })
                                 .show();
                     }))
-                    .create().show();
-            });
+                    .create().show();*/
 
             messageText = itemView.findViewById(R.id.message);
             timeText = itemView.findViewById(R.id.time);
