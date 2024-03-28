@@ -3,18 +3,25 @@ package algonquin.cst2335.prabhpreetsandroidlabs.main;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+//import android.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,6 +57,7 @@ public class ChatRoom extends AppCompatActivity {
 
 
         binding = ActivityChatRoomBinding.inflate(getLayoutInflater());
+        setSupportActionBar(binding.myToolbar);
         setContentView(binding.getRoot());
 
         chatModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
@@ -168,70 +176,13 @@ public class ChatRoom extends AppCompatActivity {
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
 
-            // Made the object for the alert dialog box named builder
-            AlertDialog.Builder builder = new AlertDialog.Builder( ChatRoom.this );
 
             /*
              * Added the listener for the working of the view when we click on the messages
              */
-            itemView.setOnClickListener( clk -> {
+            /* itemView.setOnClickListener( clk -> {
 
-                // Find the absolute position and store it in the object we created now
-                        int position = getAbsoluteAdapterPosition();
 
-                        // Use of builder object without using the builder pattern
-
-                        /* builder.setMessage("Do you want to delete the message: " + messageText.getText());
-                        builder.setTitle("Question: ");
-                        builder.setNegativeButton("No", ((dialog, cl) -> {
-                        }));
-                        builder.setPositiveButton("Yes", ((dialog, cl) -> {
-                            Executor thread = Executors.newSingleThreadExecutor();
-                            thread.execute(() ->
-                            {
-                                mDAO.deleteMessage(m);
-                            });
-                            messages.remove(position);
-                            myAdapter.notifyItemRemoved(position);
-                        }));
-                        builder.create().show();
-            });*/
-
-                /* Uses the builder pattern to set the title, messsage and added the
-                 * buttons which will work when we click on them
-                 */
-                builder.setMessage("Do you want to delete the message: " + messageText.getText())
-                    .setTitle("Question: ")
-                    .setNegativeButton("No", ((dialog, cl) -> { }))
-                    .setPositiveButton("Yes", ((dialog, cl) -> {
-
-                        /* Made the object for the ChatMessage class to store the position
-                         * of the message and will be working on that position so the
-                         * correct message will be deleted
-                         */
-                        ChatMessage m = messages.get(position);
-
-                        ChatMessage removedMessage = messages.get(position);
-
-                        /*
-                         * Delete the message by getting the exact location of the message
-                         * using the executor
-                         */
-                        Executor thread = Executors.newSingleThreadExecutor();
-                        thread.execute(() ->
-                        {
-                            mDAO.deleteMessage(m);
-                        });
-
-                        // Removes the message and notify the adapter that the message is deleted
-                        messages.remove(position);
-                        myAdapter.notifyItemRemoved(position);
-
-                        /* Used the Snackbar like the Toast it shows at the bottom of the screen
-                         * and tell us what we mention is the Snackbar.
-                         * It work to re-insert the message again after deleting it by
-                         * using the setAction method and we will use the same pattern we used for the builder
-                         */
                         Snackbar.make(messageText, "You deleted message #" + position, Snackbar.LENGTH_LONG)
                                 .setAction("Undo", clc -> {
                                     messages.add(position, removedMessage);
@@ -240,10 +191,57 @@ public class ChatRoom extends AppCompatActivity {
                                 .show();
                     }))
                     .create().show();
-            });
+            });*/
 
             messageText = itemView.findViewById(R.id.message);
             timeText = itemView.findViewById(R.id.time);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder( ChatRoom.this );
+
+        if(item.getItemId() == R.id.item_1) {
+
+            int position = messages.size() - 1;
+            ChatMessage m = messages.get(position);
+
+            builder.setMessage("Do you want to delete the message: " + m.getMessage())
+                    .setTitle("Question: ")
+                    .setNegativeButton("No", ((dialog, cl) -> {
+                    }))
+                    .setPositiveButton("Yes", ((dialog, cl) -> {
+
+                        Executor thread = Executors.newSingleThreadExecutor();
+                        thread.execute(() ->
+                        {
+                            mDAO.deleteMessage(m);
+                        });
+
+                        messages.remove(position);
+                        myAdapter.notifyItemRemoved(position);
+                    }));
+            builder.create().show();
+
+        }
+        else if (item.getItemId() == R.id.item_2) {
+
+            Toast toast = Toast.makeText(ChatRoom.this, "Version 1.0, created by Prabhpreet Kaur", Toast.LENGTH_LONG);
+            View v = toast.getView();
+            v.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+            TextView text = v.findViewById(android.R.id.message);
+            text.setTextColor(Color.WHITE);
+            toast.show();
+        }
+        return true;
     }
 }

@@ -6,11 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".main.ChatRoom">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myToolbar"
+        android:layout_width="410dp"
+        android:layout_height="50dp"
+        android:background="@color/my_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Toolbar Title" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
-        android:layout_width="0dp"
+        android:layout_width="409dp"
         android:layout_height="0dp"
-        android:background="#D3EFE9"
+        android:layout_marginTop="50dp"
+        android:background="#F1F1E1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.99"
