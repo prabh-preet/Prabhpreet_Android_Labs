@@ -45,13 +45,13 @@ public class MainActivityTest {
             e.printStackTrace();
         }
 
-        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityName) );
         appCompatEditText.perform(replaceText("12345"), closeSoftKeyboard());
 
         ViewInteraction materialButton = onView(withId(R.id.forecastButton) );
         materialButton.perform(click());
 
-        ViewInteraction textView = onView(withId(R.id.textView));
+        ViewInteraction textView = onView(withId(R.id.cityLabel));
         textView.check(matches(withText("You shall not pass!")));
     }
 
@@ -64,7 +64,7 @@ public class MainActivityTest {
         }
 
         // find the view
-        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityName) );
         // type in password123#$*
         appCompatEditText.perform(replaceText("password123#$*"));
 
@@ -74,7 +74,7 @@ public class MainActivityTest {
         materialButton.perform(click());
 
         // find the text view
-        ViewInteraction textView = onView(withId(R.id.textView));
+        ViewInteraction textView = onView(withId(R.id.cityLabel));
         // check the text
         textView.check(matches(withText("You shall not pass!")));
     }
@@ -88,7 +88,7 @@ public class MainActivityTest {
         }
 
         // find the view
-        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityName) );
         // type in PASS123#$*
         appCompatEditText.perform(replaceText("PASS123#$*"));
 
@@ -98,7 +98,7 @@ public class MainActivityTest {
         materialButton.perform(click());
 
         // find the text view
-        ViewInteraction textView = onView(withId(R.id.textView));
+        ViewInteraction textView = onView(withId(R.id.cityLabel));
         // check the text
         textView.check(matches(withText("You shall not pass!")));
     }
@@ -112,7 +112,7 @@ public class MainActivityTest {
         }
 
         // find the view
-        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityName) );
         // type in Password#$*
         appCompatEditText.perform(replaceText("Password#$*"));
 
@@ -122,7 +122,7 @@ public class MainActivityTest {
         materialButton.perform(click());
 
         // find the text view
-        ViewInteraction textView = onView(withId(R.id.textView));
+        ViewInteraction textView = onView(withId(R.id.cityLabel));
         // check the text
         textView.check(matches(withText("You shall not pass!")));
     }
@@ -136,7 +136,7 @@ public class MainActivityTest {
         }
 
         // find the view
-        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityName) );
         // type in Password123
         appCompatEditText.perform(replaceText("Password123"));
 
@@ -146,7 +146,7 @@ public class MainActivityTest {
         materialButton.perform(click());
 
         // find the text view
-        ViewInteraction textView = onView(withId(R.id.textView));
+        ViewInteraction textView = onView(withId(R.id.cityLabel));
         // check the text
         textView.check(matches(withText("You shall not pass!")));
     }
@@ -160,7 +160,7 @@ public class MainActivityTest {
         }
 
         // find the view
-        ViewInteraction appCompatEditText = onView(withId(R.id.cityTextField) );
+        ViewInteraction appCompatEditText = onView(withId(R.id.cityName) );
         // type in Password123#$*
         appCompatEditText.perform(replaceText("Password123#$*"));
 
@@ -170,7 +170,7 @@ public class MainActivityTest {
         materialButton.perform(click());
 
         // find the text view
-        ViewInteraction textView = onView(withId(R.id.textView));
+        ViewInteraction textView = onView(withId(R.id.cityLabel));
         // check the text
         textView.check(matches(withText("Your password meets the requirements")));
     }
